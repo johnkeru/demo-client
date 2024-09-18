@@ -30,6 +30,10 @@ const navItems = [
         path: '/contact',
         name: 'Contact'
     },
+    {
+        path: '/login',
+        name: 'Login'
+    },
 ]
 
 function DrawerAppBar(props) {

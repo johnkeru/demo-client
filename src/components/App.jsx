@@ -1,7 +1,8 @@
 import React from 'react'
 import ButtonAppBar from './ButtonAppBar'
-import Test from './Test'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Login from '../pages/Login'
+import Register from '../pages/Register'
 
 const Home = () => <div>Home page</div>
 const Contact = () => <div>Contact page</div>
@@ -16,7 +17,8 @@ const App = () => {
                     <Route path='/' element={<Home />} />
                     <Route path='/contact' element={<Contact />} />
                     <Route path='/about' element={<About />} />
-                    <Route path='/login' element={<h1>login</h1>} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
                 </Routes>
             </Router>
         </div>
