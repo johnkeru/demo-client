@@ -14,4 +14,6 @@ INSTALLATION
     javascript
 
 PACKAGE INSTALLATION
-    npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+    npm i @mui/material @emotion/react @emotion/styled @mui/icons-material = for component based style with icons
+    npm i react-router-dom = for navigating pages
+

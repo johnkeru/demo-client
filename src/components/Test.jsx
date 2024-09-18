@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 const Test = () => {
     // useEffect, useState
-    const [num, setNum] = useState(0)
     const [message, setMessage] = useState('')
 
     useEffect(() => {
@@ -18,7 +17,6 @@ const Test = () => {
     return (
         <div>
             <div>Test {message}</div>
-            <button onClick={() => setNum(num + 1)}>increment</button>
         </div>
     )
 }
