@@ -1,3 +1,10 @@
+SHORTCUTS
+CTRL + SPACE = suggestions
+CTRL + B = close and open tab
+CTRL + ~ = close and open terminal
+CTRL + K + W = close all file
+CTRL + W = close only current file
+
 INSTALLATION
     npm create vite@latest
     name: client
