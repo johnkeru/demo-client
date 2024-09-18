@@ -1,25 +1,33 @@
-import { Box, Typography, Button, TextField } from '@mui/material'
+import { Box, Button, TextField, Typography } from '@mui/material'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import { passwordValidation, usernameValidation } from '../utility/inputValidations'
+import axios from 'axios'
 
 const Register = () => {
 
     const {
         register,
-        handleSubmit,
+        handleSubmit, setError,
         formState: { errors },
     } = useForm()
 
     const onSubmit = (data) => {
-        // console.log(data)
+        axios.post('http://localhost:5000/register', data)
+            .then(res => {
+                const data = res.data
+                console.log(data)
+            }).catch(err => {
+                const res = err.response
+                setError(res.data.field, { type: 'validate', message: res.data.message })
+            })
     }
 
-    console.log(errors)
     return (
         <Box sx={{ width: 300, m: 'auto', mt: 10 }}>
             <Typography variant='h4' mb={2}>
-                Sign In
+                Sign Up
             </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <TextField
@@ -28,7 +36,7 @@ const Register = () => {
                     label="Username"
                     placeholder='Enter Username'
                     fullWidth
-                    {...register('username', { required: 'Username is required', })}
+                    {...register('username', usernameValidation)}
                 />
                 <Typography color='error'>{errors?.username?.message}</Typography>
                 <TextField
@@ -37,7 +45,7 @@ const Register = () => {
                     label="Password"
                     placeholder='**********'
                     fullWidth
-                    {...register('password', { required: 'Password is required', })}
+                    {...register('password', passwordValidation)}
                 />
                 <Typography color='error'>{errors?.password?.message}</Typography>
                 <Button type="submit" sx={{ mt: 5 }} variant='contained' fullWidth>Submit</Button>

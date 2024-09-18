@@ -18,4 +18,5 @@ PACKAGE INSTALLATION
     npm i @mui/material @emotion/react @emotion/styled @mui/icons-material = for component based style with icons
     npm i react-router-dom = for navigating pages
     npm i react-hook-form
+    npm i axios = alternative of fetch but better
 

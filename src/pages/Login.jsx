@@ -2,17 +2,27 @@ import { Box, Typography, Button, TextField } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { passwordValidation, usernameValidation } from '../utility/inputValidations'
+import axios from 'axios'
 
 const Login = () => {
 
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        setError,
+        formState: { errors, },
     } = useForm()
 
     const onSubmit = (data) => {
-        // console.log(data)
+        console.log(data)
+        axios.post('http://localhost:5000/login', data)
+            .then(res => {
+                const data = res.data
+            }).catch(err => {
+                const res = err.response
+                setError(res.data.field, { type: 'validate', message: res.data.message })
+            })
     }
 
     console.log(errors)
@@ -28,7 +38,7 @@ const Login = () => {
                     label="Username"
                     placeholder='Enter Username'
                     fullWidth
-                    {...register('username', { required: 'Username is required', })}
+                    {...register('username', usernameValidation)}
                 />
                 <Typography color='error'>{errors?.username?.message}</Typography>
                 <TextField
@@ -37,7 +47,7 @@ const Login = () => {
                     label="Password"
                     placeholder='**********'
                     fullWidth
-                    {...register('password', { required: 'Password is required', })}
+                    {...register('password', passwordValidation)}
                 />
                 <Typography color='error'>{errors?.password?.message}</Typography>
                 <Button type="submit" sx={{ mt: 5 }} variant='contained' fullWidth>Submit</Button>
