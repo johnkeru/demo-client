@@ -14,11 +14,28 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+
+const navItems = [
+    {
+        path: '/',
+        name: 'Home'
+    },
+    {
+        path: '/about',
+        name: 'About'
+    },
+    {
+        path: '/contact',
+        name: 'Contact'
+    },
+]
 
 function DrawerAppBar(props) {
+    const nav = useNavigate()
+
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -34,9 +51,9 @@ function DrawerAppBar(props) {
             <Divider />
             <List>
                 {navItems.map((item) => (
-                    <ListItem key={item} disablePadding>
-                        <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item} />
+                    <ListItem key={item.name} disablePadding>
+                        <ListItemButton onClick={() => nav(item.path)} sx={{ textAlign: 'center' }}>
+                            <ListItemText primary={item.name} />
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -69,8 +86,8 @@ function DrawerAppBar(props) {
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map((item) => (
-                            <Button key={item} sx={{ color: '#fff' }}>
-                                {item}
+                            <Button onClick={() => nav(item.path)} key={item.name} sx={{ color: '#fff' }}>
+                                {item.name}
                             </Button>
                         ))}
                     </Box>
@@ -97,5 +114,6 @@ function DrawerAppBar(props) {
         </Box>
     );
 }
+
 
 export default DrawerAppBar;

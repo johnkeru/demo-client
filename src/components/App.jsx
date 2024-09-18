@@ -10,8 +10,8 @@ const About = () => <div>About page</div>
 const App = () => {
     return (
         <div>
-            <ButtonAppBar />
             <Router>
+                <ButtonAppBar />
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/contact' element={<Contact />} />

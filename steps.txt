@@ -6,6 +6,7 @@ SHORTCUTS
     CTRL + ~ = close and open terminal
     CTRL + K + W = close all file
     CTRL + W = close only current file
+    ALT + (arrow up or down) = to move current line into up or down
 
 INSTALLATION
     npm create vite@latest (under rest api)
