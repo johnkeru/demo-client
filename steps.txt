@@ -1,0 +1,9 @@
+INSTALLATION
+    npm create vite@latest
+    name: client
+    react
+    javascript
+
+PACKAGE INSTALLATION
+    npm install @mui/material @emotion/react @emotion/styled
+    npm install @mui/icons-material
