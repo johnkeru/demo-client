@@ -1,16 +1,17 @@
+https://github.com/johnkeru/demo-client/blob/main/steps.txt
+
 SHORTCUTS
-CTRL + SPACE = suggestions
-CTRL + B = close and open tab
-CTRL + ~ = close and open terminal
-CTRL + K + W = close all file
-CTRL + W = close only current file
+    CTRL + SPACE = suggestions
+    CTRL + B = close and open tab
+    CTRL + ~ = close and open terminal
+    CTRL + K + W = close all file
+    CTRL + W = close only current file
 
 INSTALLATION
-    npm create vite@latest
+    npm create vite@latest (under rest api)
     name: client
     react
     javascript
 
 PACKAGE INSTALLATION
-    npm install @mui/material @emotion/react @emotion/styled
-    npm install @mui/icons-material
+    npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
