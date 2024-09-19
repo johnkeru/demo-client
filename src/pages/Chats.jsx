@@ -3,9 +3,12 @@ import { useUser } from '../contexts/UserContext'
 import { Box, Typography } from '@mui/material'
 import ListOfUsers from '../components/chat/ListOfUsers'
 import { pink } from '@mui/material/colors'
+import Welcome from '../components/chat/Welcome'
+import ChatArea from '../components/chat/ChatArea'
 
 const Chats = () => {
     const { user } = useUser()
+    const [selectedUser, setSelectedUser] = useState(null)
     // users to talk with
     const [users, setUsers] = useState([
         {
@@ -19,20 +22,16 @@ const Chats = () => {
     ])
 
     return (
-        <Box sx={{ background: pink[100] }} display={'flex'} width='80%' m='auto'>
+        <Box sx={{ background: pink[100], height: '80vh', mt: 5 }} display={'flex'} width='80%' m='auto'>
             {/* list of users */}
-            <Box>
-                <ListOfUsers users={users} />
-            </Box>
+            <ListOfUsers users={users} setSelectedUser={setSelectedUser} />
 
-            {/* if no user selected */}
-            <Box width={'100%'} display={'flex'} alignItems='center' justifyContent='center'>
-                <Typography variant='h3'>
-                    Welcome, {user?.username}
-                </Typography>
-            </Box>
+            {
+                selectedUser ?
+                    <ChatArea selectedUser={selectedUser} /> :
+                    <Welcome user={user} />
+            }
 
-            {/* if selected */}
         </Box>
     )
 }

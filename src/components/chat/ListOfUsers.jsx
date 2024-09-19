@@ -1,10 +1,10 @@
-import { Box, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { indigo } from '@mui/material/colors';
 
-const ListOfUsers = ({ users }) => {
+const ListOfUsers = ({ users, setSelectedUser }) => {
     return (
-        <Box xs={12} md={6} padding={2} sx={{ background: indigo[500], color: 'white' }}>
+        <Box width='30%' padding={2} sx={{ background: indigo[500], color: 'white' }}>
             <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
                 Contacts
             </Typography>
@@ -12,7 +12,7 @@ const ListOfUsers = ({ users }) => {
                 <List dense={true}>
                     {
                         users.map(user => (
-                            <ListItem key={user.id}>
+                            <ListItem onClick={() => setSelectedUser(user)} key={user.id} sx={{ background: 'white', color: 'black', mb: 1, borderRadius: 2, cursor: 'pointer' }}>
                                 <ListItemIcon>
                                     <AccountCircleIcon />
                                 </ListItemIcon>
@@ -22,6 +22,8 @@ const ListOfUsers = ({ users }) => {
                     }
                 </List>
             </Box>
+
+            <Button sx={{ mt: 'auto', }} variant='contained' fullWidth color='warning'>Logout</Button>
         </Box>
     )
 }
