@@ -27,6 +27,7 @@ const ChatApp = ({ selectedUser }) => {
     }
 
     useEffect(() => {
+        socket.emit('create-room', { yourId: user._id, otherId: selectedUser._id })
         api.get(`/getMessages/${user._id}/${selectedUser._id}`)
             .then(res => {
                 setMessages(res.data.messages)
@@ -35,7 +36,7 @@ const ChatApp = ({ selectedUser }) => {
 
     useEffect(() => {
         socket.on('message', (message) => {
-            setMessages([...messages, { message, you: true }])
+            setMessages([...messages, message])
         })
     }, [socket])
 
