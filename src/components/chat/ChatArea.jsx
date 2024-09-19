@@ -5,11 +5,15 @@ const ChatArea = ({ selectedUser }) => {
     return (
         <Box width={'100%'} sx={{ background: 'gray' }}>
             {/* header */}
-            <Typography variant='h4'>{selectedUser.username}</Typography>
+            <Typography variant='h5' sx={{ p: 1, color: 'white' }}>{selectedUser.username}</Typography>
             {/* chat area */}
-            <Box height='82.5%' sx={{ background: 'lightgray' }}>
-                <Typography variant='body2'>
+            <Box sx={{ background: 'lightgray', p: 1, height: '80%', width: '100%' }}>
+                <Typography sx={{ background: 'black', px: 2, py: 1, color: 'white', borderRadius: 5, width: 'fit-content' }} variant='body2'>
                     Hello,
+                </Typography>
+
+                <Typography sx={{ background: 'blue', px: 2, ml: 'auto', py: 1, color: 'white', borderRadius: 5, width: 'fit-content' }} variant='body2'>
+                    awefawefawefawe
                 </Typography>
             </Box>
             {/* input & send button */}
