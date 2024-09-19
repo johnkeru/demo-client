@@ -1,11 +1,12 @@
 import { Box, Typography, Button, TextField } from '@mui/material'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { passwordValidation, usernameValidation } from '../utility/inputValidations'
-import axios from 'axios'
+import api from '../configs/api'
 
 const Login = () => {
+    const nav = useNavigate()
 
     const {
         register,
@@ -15,17 +16,17 @@ const Login = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        console.log(data)
-        axios.post('http://localhost:5000/login', data)
+        api.post('/login', data)
             .then(res => {
                 const data = res.data
+                localStorage.setItem('token', data.token)
+                nav('/chats')
             }).catch(err => {
                 const res = err.response
                 setError(res.data.field, { type: 'validate', message: res.data.message })
             })
     }
 
-    console.log(errors)
     return (
         <Box sx={{ width: 300, m: 'auto', mt: 10 }}>
             <Typography variant='h4' mb={2}>
