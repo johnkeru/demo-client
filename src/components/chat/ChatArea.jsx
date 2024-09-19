@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, TextField, IconButton, List, ListItem, Paper, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { io } from 'socket.io-client'
@@ -6,11 +6,27 @@ import { io } from 'socket.io-client'
 const ChatApp = ({ selectedUser }) => {
     const socket = io('http://localhost:5000')
     const [message, setMessage] = useState('')
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState([
+        {
+            you: true,
+            message: 'hello'
+        },
+        {
+            you: false,
+            message: 'hi'
+        },
+    ])
 
     const handleSend = () => {
         socket.emit('message', message)
+        setMessage('')
     }
+
+    useEffect(() => {
+        socket.on('message', (message) => {
+            setMessages([...messages, { message, you: true }])
+        })
+    }, [socket])
 
     return (
         <Box sx={styles.chatContainer}>
@@ -24,16 +40,15 @@ const ChatApp = ({ selectedUser }) => {
             {/* Chat Messages */}
             <Box sx={styles.chatMessages}>
                 <List sx={styles.messageList}>
-                    <ListItem sx={styles.messageReceived}>
-                        <Paper sx={styles.messagePaper}>
-                            <Typography>Hi, how can I help you?</Typography>
-                        </Paper>
-                    </ListItem>
-                    <ListItem sx={styles.messageSent}>
-                        <Paper sx={styles.messagePaperSent}>
-                            <Typography>I have an issue with my order.</Typography>
-                        </Paper>
-                    </ListItem>
+                    {
+                        messages.map(msg => (
+                            <ListItem key={msg.message} sx={msg.you ? styles.messageSent : styles.messageReceived}>
+                                <Paper sx={msg.you ? styles.messagePaperSent : styles.messagePaper}>
+                                    <Typography>{msg.message}</Typography>
+                                </Paper>
+                            </ListItem>
+                        ))
+                    }
                 </List>
             </Box>
 
