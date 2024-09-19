@@ -22,7 +22,7 @@ const ChatApp = ({ selectedUser }) => {
     ])
 
     const handleSend = () => {
-        socket.emit('message', message)
+        socket.emit('message', { yourId: user._id, otherId: selectedUser._id, message })
         setMessage('')
     }
 
