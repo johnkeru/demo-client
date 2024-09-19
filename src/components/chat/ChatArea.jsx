@@ -6,41 +6,26 @@ import { useUser } from '../../contexts/UserContext';
 import api from '../../configs/api';
 
 const ChatApp = ({ selectedUser }) => {
-    const { user } = useUser()
-
-    const socket = io('http://localhost:5000')
-    const [message, setMessage] = useState('')
-    const [messages, setMessages] = useState([
-        {
-            you: true,
-            message: 'hello'
-        },
-        {
-            you: false,
-            message: 'hi'
-        },
-    ])
+    const { user } = useUser();
+    const socket = io('http://localhost:5000');
+    const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
 
     const handleSend = () => {
-        socket.emit('message', { yourId: user._id, otherId: selectedUser._id, message })
-        setMessage('')
-    }
+        socket.emit('message', { yourId: user._id, otherId: selectedUser._id, message });
+        setMessage('');
+    };
 
     useEffect(() => {
-        socket.emit('create-room', { yourId: user._id, otherId: selectedUser._id })
+        socket.emit('create-room', { yourId: user._id, otherId: selectedUser._id });
         api.get(`/getMessages/${user._id}/${selectedUser._id}`)
-            .then(res => {
-                setMessages(res.data.messages)
-            })
-    }, [])
+            .then(res => setMessages(res.data.messages));
+    }, [user._id, selectedUser._id]); // Adding dependencies to re-run effect when `user._id` or `selectedUser._id` changes
 
     useEffect(() => {
-        socket.on('message', (message) => {
-            setMessages([...messages, message])
-        })
-    }, [socket])
-
-
+        const handleMessage = (message) => setMessages(prevMessages => [...prevMessages, message]); // Using functional update
+        socket.on('message', handleMessage);
+    }, [socket]);
 
     return (
         <Box sx={styles.chatContainer}>
@@ -56,7 +41,7 @@ const ChatApp = ({ selectedUser }) => {
                 <List sx={styles.messageList}>
                     {
                         messages.map(msg => (
-                            <ListItem key={msg.message} sx={msg.sender === user._id ? styles.messageSent : styles.messageReceived}>
+                            <ListItem key={msg._id} sx={msg.sender === user._id ? styles.messageSent : styles.messageReceived}>
                                 <Paper sx={msg.sender === user._id ? styles.messagePaperSent : styles.messagePaper}>
                                     <Typography>{msg.message}</Typography>
                                 </Paper>

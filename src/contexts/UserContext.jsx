@@ -18,7 +18,10 @@ const UserProvider = ({ children }) => {
     useEffect(() => {
         api.get('/currentUser', { headers: { Authorization: `Bearer ${token}` } })
             .then(res => setUser(res.data.user))
-            .catch(() => nav('/login'))
+            .catch(() => {
+                localStorage.removeItem('token')
+                nav('/login')
+            })
     }, [token])
 
     return <UserContext.Provider value={{ user, setToken, logout }}>
