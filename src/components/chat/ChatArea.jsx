@@ -1,28 +1,115 @@
-import { Box, Button, TextField, Typography } from '@mui/material'
-import React from 'react'
+import React from 'react';
+import { Box, TextField, IconButton, List, ListItem, Paper, Typography } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 
-const ChatArea = ({ selectedUser }) => {
+const ChatApp = ({ selectedUser }) => {
     return (
-        <Box width={'100%'} sx={{ background: 'gray' }}>
-            {/* header */}
-            <Typography variant='h5' sx={{ p: 1, color: 'white' }}>{selectedUser.username}</Typography>
-            {/* chat area */}
-            <Box sx={{ background: 'lightgray', p: 1, height: '80%', width: '100%' }}>
-                <Typography sx={{ background: 'black', px: 2, py: 1, color: 'white', borderRadius: 5, width: 'fit-content' }} variant='body2'>
-                    Hello,
-                </Typography>
-
-                <Typography sx={{ background: 'blue', px: 2, ml: 'auto', py: 1, color: 'white', borderRadius: 5, width: 'fit-content' }} variant='body2'>
-                    awefawefawefawe
+        <Box sx={styles.chatContainer}>
+            {/* Chat Header */}
+            <Box sx={styles.chatHeader}>
+                <Typography variant="h6">
+                    {selectedUser.username}
                 </Typography>
             </Box>
-            {/* input & send button */}
-            <Box display='flex' sx={{ background: 'white' }}>
-                <TextField fullWidth placeholder='Send message...' />
-                <Button variant='contained'>Send</Button>
+
+            {/* Chat Messages */}
+            <Box sx={styles.chatMessages}>
+                <List sx={styles.messageList}>
+                    <ListItem sx={styles.messageReceived}>
+                        <Paper sx={styles.messagePaper}>
+                            <Typography>Hi, how can I help you?</Typography>
+                        </Paper>
+                    </ListItem>
+                    <ListItem sx={styles.messageSent}>
+                        <Paper sx={styles.messagePaperSent}>
+                            <Typography>I have an issue with my order.</Typography>
+                        </Paper>
+                    </ListItem>
+                </List>
+            </Box>
+
+            {/* Chat Input */}
+            <Box sx={styles.chatInput}>
+                <TextField
+                    variant="outlined"
+                    fullWidth
+                    placeholder="Type a message..."
+                    sx={styles.textField}
+                />
+                <IconButton color="primary" sx={styles.sendButton}>
+                    <SendIcon />
+                </IconButton>
             </Box>
         </Box>
-    )
-}
+    );
+};
 
-export default ChatArea
+const styles = {
+    chatContainer: {
+        width: '100%',
+        height: '100%',
+        border: '1px solid #ccc',
+        borderRadius: '10px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        backgroundColor: '#f9f9f9',
+    },
+    chatHeader: {
+        padding: '10px',
+        backgroundColor: '#1976d2',
+        color: 'white',
+        borderTopLeftRadius: '10px',
+        borderTopRightRadius: '10px',
+        textAlign: 'center',
+    },
+    chatMessages: {
+        flexGrow: 1,
+        overflowY: 'auto',
+        padding: '10px',
+        backgroundColor: '#fff',
+    },
+    messageList: {
+        padding: 0,
+        margin: 0,
+        listStyle: 'none',
+    },
+    messageReceived: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        marginBottom: '10px',
+    },
+    messageSent: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginBottom: '10px',
+    },
+    messagePaper: {
+        padding: '10px',
+        backgroundColor: '#e0e0e0',
+        borderRadius: '10px',
+        maxWidth: '70%',
+    },
+    messagePaperSent: {
+        padding: '10px',
+        backgroundColor: '#1976d2',
+        color: 'white',
+        borderRadius: '10px',
+        maxWidth: '70%',
+    },
+    chatInput: {
+        display: 'flex',
+        padding: '10px',
+        backgroundColor: '#f1f1f1',
+        borderBottomLeftRadius: '10px',
+        borderBottomRightRadius: '10px',
+    },
+    textField: {
+        marginRight: '10px',
+    },
+    sendButton: {
+        alignSelf: 'center',
+    },
+};
+
+export default ChatApp;

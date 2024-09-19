@@ -22,7 +22,7 @@ const Chats = () => {
     ])
 
     return (
-        <Box sx={{ background: pink[100], height: '80vh', mt: 5 }} display={'flex'} width='80%' m='auto'>
+        <Box sx={{ background: pink[100], height: '80vh', mt: 5, width: '80%', mx: 'auto', display: 'flex' }}>
             {/* list of users */}
             <ListOfUsers users={users} setSelectedUser={setSelectedUser} />
 

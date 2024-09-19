@@ -1,8 +1,10 @@
-import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Box, Button, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { indigo } from '@mui/material/colors';
+import { useUser } from '../../contexts/UserContext';
 
 const ListOfUsers = ({ users, setSelectedUser }) => {
+    const { logout } = useUser()
     return (
         <Box width='30%' padding={2} sx={{ background: indigo[500], color: 'white' }}>
             <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
@@ -23,7 +25,7 @@ const ListOfUsers = ({ users, setSelectedUser }) => {
                 </List>
             </Box>
 
-            <Button sx={{ mt: 'auto', }} variant='contained' fullWidth color='warning'>Logout</Button>
+            <Button onClick={logout} variant='contained' fullWidth color='warning'>Logout</Button>
         </Box>
     )
 }
