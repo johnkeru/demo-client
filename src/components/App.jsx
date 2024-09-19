@@ -14,8 +14,8 @@ const App = () => {
     return (
         <div>
             {/* wrap all components in user provider */}
-            <UserProvider>
-                <Router>
+            <Router>
+                <UserProvider>
                     <ButtonAppBar />
                     <Routes>
                         <Route path='/' element={<Home />} />
@@ -25,8 +25,8 @@ const App = () => {
                         <Route path='/register' element={<Register />} />
                         <Route path='/chats' element={<Chats />} />
                     </Routes>
-                </Router>
-            </UserProvider>
+                </UserProvider>
+            </Router>
         </div>
     )
 }
