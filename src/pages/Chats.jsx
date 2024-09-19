@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { useUser } from '../contexts/UserContext'
-import { Box, Typography } from '@mui/material'
-import ListOfUsers from '../components/chat/ListOfUsers'
+import { Box } from '@mui/material'
 import { pink } from '@mui/material/colors'
-import Welcome from '../components/chat/Welcome'
+import React, { useState } from 'react'
 import ChatArea from '../components/chat/ChatArea'
+import ListOfUsers from '../components/chat/ListOfUsers'
+import Welcome from '../components/chat/Welcome'
+import { useUser } from '../contexts/UserContext'
 
 const Chats = () => {
     const { user } = useUser()
     const [selectedUser, setSelectedUser] = useState(null)
-    // users to talk with
+    // users to talk with: must get to the db users
     const [users, setUsers] = useState([
         {
             id: 1,
