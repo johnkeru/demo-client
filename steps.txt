@@ -20,3 +20,8 @@ PACKAGE INSTALLATION
     npm i react-hook-form
     npm i axios = alternative of fetch but better
     npm i socket.io-client
+
+
+get the message from input
+when button is click it will emit the event called 'message'
+the server will listen to that event ('message') and console.log

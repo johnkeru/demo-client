@@ -6,6 +6,7 @@ import { io } from 'socket.io-client'
 const ChatApp = ({ selectedUser }) => {
     const socket = io('http://localhost:5000')
     const [message, setMessage] = useState('')
+    const [messages, setMessages] = useState([])
 
     const handleSend = () => {
         socket.emit('message', message)
