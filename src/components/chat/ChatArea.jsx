@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, TextField, IconButton, List, ListItem, Paper, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import { io } from 'socket.io-client'
 
 const ChatApp = ({ selectedUser }) => {
+    const socket = io('http://localhost:5000')
+    const [message, setMessage] = useState('')
+
+    const handleSend = () => {
+        socket.emit('message', message)
+    }
+
     return (
         <Box sx={styles.chatContainer}>
             {/* Chat Header */}
@@ -31,12 +39,14 @@ const ChatApp = ({ selectedUser }) => {
             {/* Chat Input */}
             <Box sx={styles.chatInput}>
                 <TextField
+                    onChange={e => setMessage(e.target.value)}
+                    value={message}
                     variant="outlined"
                     fullWidth
-                    placeholder="Type a message..."
+                    placeholder={`Say hi to ${selectedUser.username} 👋`}
                     sx={styles.textField}
                 />
-                <IconButton color="primary" sx={styles.sendButton}>
+                <IconButton onClick={handleSend} color="primary" sx={styles.sendButton}>
                     <SendIcon />
                 </IconButton>
             </Box>

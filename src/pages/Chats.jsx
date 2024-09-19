@@ -6,10 +6,8 @@ import ListOfUsers from '../components/chat/ListOfUsers'
 import Welcome from '../components/chat/Welcome'
 import { useUser } from '../contexts/UserContext'
 import api from '../configs/api'
-import { io } from 'socket.io-client'
 
 const Chats = () => {
-    const socket = io('http://localhost:5000')
 
     const { user } = useUser()
     const [selectedUser, setSelectedUser] = useState(null)
@@ -18,9 +16,7 @@ const Chats = () => {
 
     useEffect(() => {
         api.get('/getAllUsers')
-            .then(res => {
-                setUsers(res.data.users)
-            })
+            .then(res => setUsers(res.data.users))
     }, [])
 
     return (
