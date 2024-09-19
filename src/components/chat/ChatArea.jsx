@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Box, TextField, IconButton, List, ListItem, Paper, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { io } from 'socket.io-client'
+import { useUser } from '../../contexts/UserContext';
+import api from '../../configs/api';
 
 const ChatApp = ({ selectedUser }) => {
+    const { user } = useUser()
+
     const socket = io('http://localhost:5000')
     const [message, setMessage] = useState('')
     const [messages, setMessages] = useState([
@@ -23,10 +27,19 @@ const ChatApp = ({ selectedUser }) => {
     }
 
     useEffect(() => {
+        api.get(`/getMessages/${user._id}/${selectedUser._id}`)
+            .then(res => {
+                setMessages(res.data.messages)
+            })
+    }, [])
+
+    useEffect(() => {
         socket.on('message', (message) => {
             setMessages([...messages, { message, you: true }])
         })
     }, [socket])
+
+
 
     return (
         <Box sx={styles.chatContainer}>
@@ -42,8 +55,8 @@ const ChatApp = ({ selectedUser }) => {
                 <List sx={styles.messageList}>
                     {
                         messages.map(msg => (
-                            <ListItem key={msg.message} sx={msg.you ? styles.messageSent : styles.messageReceived}>
-                                <Paper sx={msg.you ? styles.messagePaperSent : styles.messagePaper}>
+                            <ListItem key={msg.message} sx={msg.sender === user._id ? styles.messageSent : styles.messageReceived}>
+                                <Paper sx={msg.sender === user._id ? styles.messagePaperSent : styles.messagePaper}>
                                     <Typography>{msg.message}</Typography>
                                 </Paper>
                             </ListItem>
