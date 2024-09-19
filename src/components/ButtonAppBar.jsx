@@ -15,29 +15,48 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/UserContext';
 
 const drawerWidth = 240;
-const navItems = [
-    {
-        path: '/',
-        name: 'Home'
-    },
-    {
-        path: '/about',
-        name: 'About'
-    },
-    {
-        path: '/contact',
-        name: 'Contact'
-    },
-    {
-        path: '/login',
-        name: 'Login'
-    },
-]
 
 function DrawerAppBar(props) {
     const nav = useNavigate()
+    const { user } = useUser()
+
+
+    const navItems = user ? [
+        {
+            path: '/',
+            name: 'Home'
+        },
+        {
+            path: '/about',
+            name: 'About'
+        },
+        {
+            path: '/contact',
+            name: 'Contact'
+        },
+    ]
+        : [
+            {
+                path: '/',
+                name: 'Home'
+            },
+            {
+                path: '/about',
+                name: 'About'
+            },
+            {
+                path: '/contact',
+                name: 'Contact'
+            },
+            {
+                path: '/login',
+                name: 'Login'
+            },
+        ]
+
 
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
