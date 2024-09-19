@@ -11,10 +11,10 @@ const ListOfUsers = ({ users, setSelectedUser }) => {
                 Contacts
             </Typography>
             <Box>
-                <List dense={true}>
+                <List dense={true} sx={{ overflowY: 'scroll', height: '55vh' }}>
                     {
                         users.map(user => (
-                            <ListItem onClick={() => setSelectedUser(user)} key={user.id} sx={{ background: 'white', color: 'black', mb: 1, borderRadius: 2, cursor: 'pointer' }}>
+                            <ListItem onClick={() => setSelectedUser(user)} key={user._id} sx={{ background: 'white', color: 'black', mb: 1, borderRadius: 2, cursor: 'pointer' }}>
                                 <ListItemIcon>
                                     <AccountCircleIcon />
                                 </ListItemIcon>
@@ -22,6 +22,7 @@ const ListOfUsers = ({ users, setSelectedUser }) => {
                             </ListItem>
                         ))
                     }
+
                 </List>
             </Box>
 
