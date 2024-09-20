@@ -6,8 +6,9 @@ import { useUser } from '../../contexts/UserContext';
 import api from '../../configs/api';
 
 const ChatApp = ({ selectedUser }) => {
-    const { user } = useUser();
     const socket = io('http://localhost:5000');
+
+    const { user } = useUser();
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
