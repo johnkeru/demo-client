@@ -12,7 +12,9 @@ const ChatApp = ({ selectedUser }) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
-    const handleSend = () => {
+    const handleSend = (e) => {
+        e.preventDefault()
+        if (!message) return
         socket.emit('message', { yourId: user._id, otherId: selectedUser._id, message });
         setMessage('');
     };
@@ -53,19 +55,21 @@ const ChatApp = ({ selectedUser }) => {
             </Box>
 
             {/* Chat Input */}
-            <Box sx={styles.chatInput}>
-                <TextField
-                    onChange={e => setMessage(e.target.value)}
-                    value={message}
-                    variant="outlined"
-                    fullWidth
-                    placeholder={`Say hi to ${selectedUser.username} 👋`}
-                    sx={styles.textField}
-                />
-                <IconButton onClick={handleSend} color="primary" sx={styles.sendButton}>
-                    <SendIcon />
-                </IconButton>
-            </Box>
+            <form onSubmit={handleSend}>
+                <Box sx={styles.chatInput}>
+                    <TextField
+                        onChange={e => setMessage(e.target.value)}
+                        value={message}
+                        variant="outlined"
+                        fullWidth
+                        placeholder={`Say hi to ${selectedUser.username} 👋`}
+                        sx={styles.textField}
+                    />
+                    <IconButton type='submit' color="primary" sx={styles.sendButton}>
+                        <SendIcon />
+                    </IconButton>
+                </Box>
+            </form>
         </Box>
     );
 };
