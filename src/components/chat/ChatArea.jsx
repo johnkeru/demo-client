@@ -4,6 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { io } from 'socket.io-client'
 import { useUser } from '../../contexts/UserContext';
 import api from '../../configs/api';
+import autoScroll from '../../utility/autoScroll';
 
 const ChatApp = ({ selectedUser }) => {
     const socket = io('http://localhost:5000');
@@ -27,6 +28,7 @@ const ChatApp = ({ selectedUser }) => {
 
     useEffect(() => {
         const handleMessage = (message) => setMessages(prevMessages => [...prevMessages, message]); // Using functional update
+        autoScroll(true)
         socket.on('message', handleMessage);
     }, [socket]);
 
@@ -40,7 +42,7 @@ const ChatApp = ({ selectedUser }) => {
             </Box>
 
             {/* Chat Messages */}
-            <Box sx={styles.chatMessages}>
+            <Box sx={styles.chatMessages} className='chat-body'>
                 <List sx={styles.messageList}>
                     {
                         messages.map(msg => (
