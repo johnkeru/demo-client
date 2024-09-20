@@ -37,6 +37,10 @@ function DrawerAppBar(props) {
             path: '/contact',
             name: 'Contact'
         },
+        {
+            path: '/chats',
+            name: 'Chat'
+        },
     ]
         : [
             {

@@ -5,12 +5,14 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Chats from '../pages/Chats'
 import UserProvider, { useUser } from '../contexts/UserContext'
+import getEnv from '../utility/getEnv'
 
 const Home = () => <div>Home page</div>
 const Contact = () => <div>Contact page</div>
 const About = () => <div>About page</div>
 
 const App = () => {
+    console.log(getEnv('VITE_SERVER_URL'))
     return (
         <div>
             {/* wrap all components in user provider */}
